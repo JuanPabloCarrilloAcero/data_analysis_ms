@@ -1,16 +1,9 @@
-import os
-
-from flask import Flask, jsonify
 from dotenv import load_dotenv
+from flask import Flask, jsonify
 
-from get_stock_data import get_daily_data
-from predict_price import predict_price
-from transform_data import transform_daily
+from services import price_prediction_service, valuable_stock_service
 
 load_dotenv()
-
-ALPHA_VANTAGE_KEY = os.environ.get('ALPHA_VANTAGE_KEY')
-STOCK_API_URL = os.environ.get('STOCK_API_URL')
 
 app = Flask(__name__)
 
@@ -28,37 +21,32 @@ def hello_world():
 @app.route('/price_prediction/<symbol>/<time>', methods=['GET'])
 def price_prediction(symbol, time):
     try:
-        data = get_daily_data(STOCK_API_URL, ALPHA_VANTAGE_KEY, symbol)
+        result = price_prediction_service(symbol, time).to_json()
+        return result, 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-    df = transform_daily(data)
-
-    prediction = predict_price(df, time)
-
-    print(prediction)
-
-    return jsonify("all good"), 200
-
-
-@app.route('/daily_data/<symbol>', methods=['GET'])
-def daily_data(symbol):
-    data = daily_data(STOCK_API_URL, ALPHA_VANTAGE_KEY, symbol)
-    return data
 
 
 # Valuable stock controller
 # returns a list of valuable stocks based on future predictions
-@app.route('/valuable_stock', methods=['GET'])
-def valuable_stock():
-    return 'Hello World!'
+@app.route('/valuable_stock/<time>', methods=['GET'])
+def valuable_stock(time):
+    try:
+        result = valuable_stock_service(time)
+        return result, 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # Relevant stock controller
 # returns a list of relevant stocks based on current values
-@app.route('/relevant_stock', methods=['GET'])
-def relevant_stock():
-    return 'Hello World!'
+@app.route('/relevant_stock/<time>', methods=['GET'])
+def relevant_stock(time):
+    try:
+        result = relevant_stock_service(time)
+        return result, 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == '__main__':
