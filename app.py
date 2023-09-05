@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from flask import Flask, jsonify
 
-from services import price_prediction_service, valuable_stock_service
+from services import price_prediction_service, valuable_stock_service, relevant_stock_service
 
 load_dotenv()
 

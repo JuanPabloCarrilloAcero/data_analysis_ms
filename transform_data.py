@@ -25,4 +25,6 @@ def transform_daily(data_json):
 
     df = df.dropna()
 
+    df.sort_index(ascending=True, inplace=True)
+
     return df

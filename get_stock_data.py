@@ -11,7 +11,8 @@ STOCK_API_URL = os.environ.get('STOCK_API_URL')
 def get_daily_data(symbol):
     try:
         response = requests.get(
-            f"{STOCK_API_URL}/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={ALPHA_VANTAGE_KEY}")
+            f"{STOCK_API_URL}/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={ALPHA_VANTAGE_KEY}"
+        )
 
         if response.status_code == 200:
             stock_data = response.json()
