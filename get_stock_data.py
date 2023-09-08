@@ -1,8 +1,8 @@
 import os
 import requests
 
-ALPHA_VANTAGE_KEY = os.environ.get('ALPHA_VANTAGE_KEY')
-STOCK_API_URL = os.environ.get('STOCK_API_URL')
+FINANCIAL_API_KEY = os.environ.get('FINANCIAL_API_KEY')
+FINANCIAL_API_URL = os.environ.get('FINANCIAL_API_URL')
 
 
 # Function to get TIME_SERIES_DAILY from the stock API
@@ -11,7 +11,7 @@ STOCK_API_URL = os.environ.get('STOCK_API_URL')
 def get_daily_data(symbol):
     try:
         response = requests.get(
-            f"{STOCK_API_URL}/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={ALPHA_VANTAGE_KEY}"
+            f"{FINANCIAL_API_URL}/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={FINANCIAL_API_KEY}"
         )
 
         if response.status_code == 200:
