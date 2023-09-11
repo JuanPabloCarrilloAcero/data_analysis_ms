@@ -1,1 +1,1 @@
-GET http://localhost:5000/price_prediction/AAPL/day
+GET http://localhost:5000/price_prediction/AAPL/30

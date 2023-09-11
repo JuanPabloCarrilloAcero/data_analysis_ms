@@ -1,8 +1,7 @@
 import os
 import requests
 
-FINANCIAL_API_KEY = os.environ.get('FINANCIAL_API_KEY')
-FINANCIAL_API_URL = os.environ.get('FINANCIAL_API_URL')
+STOCKS_MS_URL = os.environ.get('STOCKS_MS_URL')
 
 
 # Function to get TIME_SERIES_DAILY from the stock API
@@ -11,7 +10,7 @@ FINANCIAL_API_URL = os.environ.get('FINANCIAL_API_URL')
 def get_daily_data(symbol):
     try:
         response = requests.get(
-            f"{FINANCIAL_API_URL}/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={FINANCIAL_API_KEY}"
+            f"{STOCKS_MS_URL}/get/historic/{symbol}"
         )
 
         if response.status_code == 200:
@@ -25,4 +24,17 @@ def get_daily_data(symbol):
 
 
 def get_all_stocks():
-    return {"stocks": ["AAPL", "GOOG", "TSLA", "NVDA"]}
+    try:
+        response = requests.get(
+            f"{STOCKS_MS_URL}/get/empresas"
+        )
+
+        if response.status_code == 200:
+            stock_data = response.json()
+            return stock_data
+        else:
+            raise Exception("Failed to fetch data from the API")
+
+    except Exception as e:
+        raise e
+    # return {"stocks": ["AAPL", "GOOG", "TSLA", "NVDA"]}
