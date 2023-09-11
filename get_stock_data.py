@@ -1,7 +1,8 @@
 import os
 import requests
 
-STOCKS_MS_URL = os.environ.get('STOCKS_MS_URL')
+STOCKS_MS_URL = os.getenv('STOCKS_MS_URL')
+print(STOCKS_MS_URL)
 
 
 # Function to get TIME_SERIES_DAILY from the stock API

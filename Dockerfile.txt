@@ -1,7 +1,7 @@
 Build the Docker Image
 
-RUN "docker build -t my-flask-app ."
+RUN "docker build -t data_analysis_ms ."
 
 Run the Docker Container
 
-RUN "docker run -d -p 5000:5000 my-flask-app"
+RUN "docker run -e STOCKS_MS_URL=http://stocks_ms:3000 --network mynetwork  -d -p 5000:5000 data_analysis_ms"
