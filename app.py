@@ -51,6 +51,6 @@ def relevant_stock(time):
 
 if __name__ == '__main__':
     # Development:
-    app.run()
+    # app.run()
     # Production:
-    # app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=4444, debug=True)

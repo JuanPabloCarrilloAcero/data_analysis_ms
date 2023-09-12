@@ -4,4 +4,4 @@ RUN "docker build -t data_analysis_ms ."
 
 Run the Docker Container
 
-RUN "docker run -e STOCKS_MS_URL=http://stocks_ms:3000 --network mynetwork  -d -p 5000:5000 data_analysis_ms"
+RUN "docker run -e STOCKS_MS_URL=http://stocks_ms:8000 --network mynetwork  -d -p 4444:4444 data_analysis_ms"

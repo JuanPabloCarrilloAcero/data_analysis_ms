@@ -1,1 +1,1 @@
-GET http://localhost:5000/valuable_stock/30
+GET http://localhost:4444/valuable_stock/30
